@@ -15,8 +15,6 @@ class Socket {
   struct sockaddr_in sock_addr {};
 
  public:
-  Socket() {}
-
   Socket(int domain, int type, int protocol);
 
   Socket(int socket_descriptor);
@@ -43,7 +41,7 @@ class Socket {
 
   void writeAll(void* buffer, size_t n) const;
 
-  void readAll(void* buffer, size_t n) const;
+  int readAll(void* buffer, size_t n) const;
 
   int read_s(void* buffer, size_t n) const;
 

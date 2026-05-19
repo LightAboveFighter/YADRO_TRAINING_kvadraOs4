@@ -78,7 +78,7 @@ void Socket::writeAll(void* buffer, size_t n) const {
   }
 }
 
-void Socket::readAll(void* buffer, size_t n) const {
+int Socket::readAll(void* buffer, size_t n) const {
   char* arr = static_cast<char*>(buffer);
   size_t remaining = n;
   int read_bytes;
@@ -87,16 +87,19 @@ void Socket::readAll(void* buffer, size_t n) const {
     if (read_bytes <= 0) {
       if (errno == EINTR) continue;
       throw std::system_error(errno, std::generic_category(), "read");
+    } else if (read_bytes == 0) {
+      return n - remaining;
     }
     arr += read_bytes;
     remaining -= read_bytes;
   }
+  return n;
 }
 
 int Socket::read_s(void* buffer, size_t n) const {
   int read_bytes;
   read_bytes = read(fd, buffer, n);
-  if (read_bytes <= 0) {
+  if (read_bytes < 0) {
     throw std::system_error(errno, std::generic_category(), "read");
   }
   return read_bytes;
