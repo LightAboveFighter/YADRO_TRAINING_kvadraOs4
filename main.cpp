@@ -29,7 +29,7 @@ void signalHandler(int /*signum*/) {
     global_controller->running = false;
     global_controller->cv.notify_all();
   }
-  std::cout << "\nЗавершение работы..." << std::endl;
+  std::cout << "\nShutdown..." << std::endl;
 }
 
 int main(int argc, char** argv) {
