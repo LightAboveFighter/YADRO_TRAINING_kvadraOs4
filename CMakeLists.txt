@@ -8,6 +8,11 @@ set(SOURCES
     main.cpp 
     sys_classes.cpp 
     sys_classes.hpp
+    scanner.hpp 
+    scanner.cpp 
+    server.hpp 
+    server.cpp
+    thread_resource_controller.hpp
 )
 
 add_executable(YADRO_TRAINING_kvadraOs4 ${SOURCES})
