@@ -31,7 +31,7 @@ void Server::listen_update_loop(std::shared_ptr<std::string>& server_json) {
       total = 0;
       while (total < (ssize_t)sizeof(buf) - 1) {
         n = client.read_s(buf + total, sizeof(buf) - total - 1);
-        if (n <= 0) {
+        if (n == 0) {
           break;
         }
         total += n;
